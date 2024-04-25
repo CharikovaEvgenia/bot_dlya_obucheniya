@@ -14,12 +14,14 @@ def start(message):
     btn4 = types.KeyboardButton("Telegram")
     btn5 = types.KeyboardButton("Random")
     markup.add(btn1, btn2, btn3, btn4, btn5)
-    bot.send_message(message.from_user.id, " Выберите нужный курс ", reply_markup=markup)
+    bot.send_message(message.from_user.id, " Выберите нужный курс)", reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    if message.text == 'Python':
-         bot.send_message(message.from_user.id, " Описание курса ", reply_markup=markup)
+    if message.text == 'ИмяКотика':
+        with open('Names.txt', encoding='utf-8') as file:
+            lines = file.readlines()
+        bot.send_message(message.from_user.id, lines[random.randint(0, len(lines)-1)])
     elif message.text == 'ФотоКотика':
         photo_dir = 'C:\\Users\\Женя\\Desktop\\Botinok\\Images'
         photo_files = os.listdir(photo_dir)
